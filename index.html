@@ -300,14 +300,39 @@ section { padding: 120px 40px; position: relative; }
   width: 100%; height: 100%; transition: transform 0.6s ease;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-size: 28px; font-weight: 800;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.5px; position: relative; overflow: hidden;
 }
 .project-card:hover .project-thumb-inner { transform: scale(1.05); }
-.project-img {
-  width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
-  display: block;
+
+/* Mock device frames inside project covers */
+.project-thumb-inner::before {
+  content: ''; position: absolute; width: 55%; height: 70%; border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04); right: 10%; top: 50%; transform: translateY(-50%);
 }
-.project-card:hover .project-img { transform: scale(1.05); }
+.project-thumb-inner::after {
+  content: ''; position: absolute; width: 30%; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,0.1); right: 22.5%; top: 26%;
+}
+/* Phone mockup for mobile apps */
+.project-thumb-inner.mashwar::before, .project-thumb-inner.zippy::before,
+.project-thumb-inner.voyage::before, .project-thumb-inner.skegg::before,
+.project-thumb-inner.musig::before {
+  width: 28%; height: 75%; border-radius: 16px; right: 15%;
+  border: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05);
+}
+.project-thumb-inner.mashwar::after, .project-thumb-inner.zippy::after,
+.project-thumb-inner.voyage::after, .project-thumb-inner.skegg::after,
+.project-thumb-inner.musig::after {
+  width: 10%; height: 3px; right: 24%; top: 18%; border-radius: 2px;
+}
+/* Decorative shapes */
+.project-thumb-inner .deco {
+  position: absolute; border-radius: 50%; opacity: 0.15; z-index: 0;
+}
+.project-thumb-inner .deco-1 { width: 120px; height: 120px; top: -20px; left: -20px; background: rgba(255,255,255,0.2); }
+.project-thumb-inner .deco-2 { width: 60px; height: 60px; bottom: 20px; right: 40px; background: rgba(255,255,255,0.1); border-radius: 8px; transform: rotate(25deg); }
+.project-thumb-inner .name-text { position: relative; z-index: 1; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 
 /* Unique project gradients */
 .project-thumb-inner.mashwar { background: linear-gradient(135deg, #1a237e, #283593); color: rgba(255,255,255,0.85); }
@@ -610,8 +635,8 @@ body::after {
 
       <div class="project-card reveal" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2360" alt="EdVizi System" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner edvizi" style="display:none">EdVizi</div>
+          
+          <div class="project-thumb-inner edvizi" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">EdVizi</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">SaaS B2B</div>
@@ -623,12 +648,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-1" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2224" alt="Mashwar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner mashwar" style="display:none">Mashwar</div>
+          
+          <div class="project-thumb-inner mashwar" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Mashwar</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Mobile App</div>
-          <div class="project-name">Mashwar</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Mashwar</span></div>
           <div class="project-desc">A freight booking mobile app bridging communication between customers and freight drivers seamlessly.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -636,11 +661,11 @@ body::after {
 
       <div class="project-card reveal reveal-delay-2" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <div class="project-thumb-inner ptf">Pro Traders Fund</div>
+          <div class="project-thumb-inner ptf"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Pro Traders Fund</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">SaaS / Fintech</div>
-          <div class="project-name">Pro Traders Fund</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Pro Traders Fund</span></div>
           <div class="project-desc">Platform for traders to access proprietary funding, performance tracking, risk controls, and capital scaling.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -648,12 +673,12 @@ body::after {
 
       <div class="project-card reveal" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2243" alt="Zippy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner zippy" style="display:none">Zippy</div>
+          
+          <div class="project-thumb-inner zippy" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Zippy</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Mobile App</div>
-          <div class="project-name">Zippy</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Zippy</span></div>
           <div class="project-desc">Mobile application designed with a focus on speed, usability, and clean visual hierarchy.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -661,12 +686,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-1" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2262" alt="Voyage Cabin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner voyage" style="display:none">Voyage Cabin</div>
+          
+          <div class="project-thumb-inner voyage" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Voyage Cabin</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Mobile App</div>
-          <div class="project-name">Voyage Cabin</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Voyage Cabin</span></div>
           <div class="project-desc">Travel and booking experience with immersive visual storytelling and intuitive navigation flows.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -674,12 +699,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-2" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2368" alt="Arctic Intelligence" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner arctic" style="display:none">Arctic Intelligence</div>
+          
+          <div class="project-thumb-inner arctic" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Arctic Intelligence</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">SaaS B2B</div>
-          <div class="project-name">Arctic Intelligence</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Arctic Intelligence</span></div>
           <div class="project-desc">Enterprise intelligence platform with data-driven dashboards and compliance workflows.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -687,12 +712,12 @@ body::after {
 
       <div class="project-card reveal" data-category="website" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2319" alt="Me Care" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner mecare" style="display:none">Me Care</div>
+          
+          <div class="project-thumb-inner mecare" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Me Care</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Website Design</div>
-          <div class="project-name">Me Care</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Me Care</span></div>
           <div class="project-desc">Healthcare-focused website with clean, trustworthy aesthetics and accessible user flows.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -700,12 +725,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-1" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2281" alt="Skegg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner skegg" style="display:none">Skegg</div>
+          
+          <div class="project-thumb-inner skegg" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Skegg</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Mobile App</div>
-          <div class="project-name">Skegg</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Skegg</span></div>
           <div class="project-desc">Mobile product with refined micro-interactions and a bold visual identity system.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -713,12 +738,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-2" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2376" alt="Polyread AI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner polyread" style="display:none">Polyread AI</div>
+          
+          <div class="project-thumb-inner polyread" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Polyread AI</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">SaaS B2B</div>
-          <div class="project-name">Polyread AI</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Polyread AI</span></div>
           <div class="project-desc">AI-powered reading and content platform with intelligent summarization features.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -726,12 +751,12 @@ body::after {
 
       <div class="project-card reveal" data-category="website" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2335" alt="Haris Travels" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner haris" style="display:none">Haris Travels</div>
+          
+          <div class="project-thumb-inner haris" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Haris Travels</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Website Design</div>
-          <div class="project-name">Haris Travels</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Haris Travels</span></div>
           <div class="project-desc">Travel agency website with vibrant visuals and conversion-optimized booking flows.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -739,12 +764,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-1" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2384" alt="Intulect" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner intulect" style="display:none">Intulect</div>
+          
+          <div class="project-thumb-inner intulect" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Intulect</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">SaaS B2B</div>
-          <div class="project-name">Intulect</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Intulect</span></div>
           <div class="project-desc">Enterprise SaaS platform focused on intelligent automation and workflow optimization.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -752,12 +777,12 @@ body::after {
 
       <div class="project-card reveal reveal-delay-2" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2300" alt="Musig" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner musig" style="display:none">Musig</div>
+          
+          <div class="project-thumb-inner musig" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Musig</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Mobile App</div>
-          <div class="project-name">Musig</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Musig</span></div>
           <div class="project-desc">Music-centric mobile experience with immersive audio controls and dynamic visual UI.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -765,12 +790,12 @@ body::after {
 
       <div class="project-card reveal" data-category="landing" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2401" alt="Business Consultant" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="project-thumb-inner consultant" style="display:none">Business Consultant</div>
+          
+          <div class="project-thumb-inner consultant" ><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Business Consultant</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Landing Page</div>
-          <div class="project-name">Business Consultant</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Business Consultant</span></div>
           <div class="project-desc">High-converting landing page for a business consulting firm with strategic messaging and CTAs.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
@@ -778,11 +803,11 @@ body::after {
 
       <div class="project-card reveal" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
         <div class="project-thumb">
-          <div class="project-thumb-inner" style="background: linear-gradient(135deg, #1565c0, #1976d2); color: rgba(255,255,255,0.85);">Qick</div>
+          <div class="project-thumb-inner" style="background: linear-gradient(135deg, #1565c0, #1976d2); color: rgba(255,255,255,0.85);"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Qick</span></div>
         </div>
         <div class="project-info">
           <div class="project-category">Mobile App</div>
-          <div class="project-name">Qick</div>
+          <div class="project-name"><span class="deco deco-1"></span><span class="deco deco-2"></span><span class="name-text">Qick</span></div>
           <div class="project-desc">Simplifies soccer facility management with automated bookings, payments, scheduling, and player coordination.</div>
         </div>
         <div class="project-link-arrow">&#8599;</div>
