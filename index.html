@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rana Mubashir — Senior UI/UX & Product Designer</title>
+<meta name="description" content="Portfolio of Rana Mubashir, a Senior UI/UX & Product Designer with 4+ years of experience crafting user-centered digital products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #07081a;
+  --bg-secondary: #0c0e2a;
+  --surface: rgba(255,255,255,0.03);
+  --surface-hover: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.08);
+  --text-primary: #e8eaf6;
+  --text-secondary: rgba(255,255,255,0.5);
+  --text-muted: rgba(255,255,255,0.3);
+  --accent: #6c63ff;
+  --accent-glow: rgba(108,99,255,0.3);
+  --accent-light: #8b83ff;
+  --cyan: #4dd0e1;
+  --cyan-glow: rgba(77,208,225,0.2);
+  --gradient-1: linear-gradient(135deg, #6c63ff 0%, #4dd0e1 100%);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --radius-lg: 24px;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --max-width: 1200px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-primary); }
+body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+/* =================== NAVIGATION =================== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 20px 40px;
+  backdrop-filter: blur(20px);
+  background: rgba(7,8,26,0.8);
+  border-bottom: 1px solid var(--glass-border);
+  transition: var(--transition);
+}
+.nav-inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-display); font-weight: 800; font-size: 20px;
+  background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 400; color: var(--text-secondary);
+  transition: var(--transition); letter-spacing: 0.5px; text-transform: uppercase;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--gradient-1); transition: var(--transition);
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 10px 24px; border-radius: 50px; font-size: 13px; font-weight: 600;
+  background: var(--gradient-1); color: #fff; letter-spacing: 0.5px;
+  transition: var(--transition); cursor: pointer; border: none;
+  text-transform: uppercase;
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+
+.mobile-toggle { display: none; cursor: pointer; background: none; border: none; padding: 4px; }
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: var(--transition); }
+
+/* =================== HERO =================== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; padding: 120px 40px 80px; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(108,99,255,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(77,208,225,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 20% 80%, rgba(108,99,255,0.06) 0%, transparent 60%);
+}
+
+/* Floating 3D Objects */
+.float-obj {
+  position: absolute; border-radius: 50%; z-index: 1; filter: blur(0.5px);
+}
+.float-obj-1 {
+  width: 120px; height: 120px; top: 20%; left: 12%;
+  background: radial-gradient(circle at 30% 30%, #8b83ff, #4a42cc);
+  box-shadow: 0 0 60px rgba(108,99,255,0.4), inset 0 -20px 40px rgba(0,0,0,0.3);
+  animation: float-1 8s ease-in-out infinite;
+}
+.float-obj-2 {
+  width: 80px; height: 80px; top: 15%; right: 15%;
+  background: linear-gradient(135deg, #7c6cff, #5a4ec9);
+  border-radius: 12px; transform: rotate(35deg);
+  box-shadow: 0 0 40px rgba(108,99,255,0.3), inset 0 -10px 20px rgba(0,0,0,0.3);
+  animation: float-2 10s ease-in-out infinite;
+}
+.float-obj-3 {
+  width: 100px; height: 100px; bottom: 25%; left: 8%;
+  background: linear-gradient(180deg, #4dd0e1, #26a1b0);
+  border-radius: 0 50% 50% 50%;
+  box-shadow: 0 0 50px var(--cyan-glow), inset 0 -15px 30px rgba(0,0,0,0.2);
+  animation: float-3 9s ease-in-out infinite;
+}
+.float-obj-4 {
+  width: 60px; height: 60px; bottom: 15%; right: 20%;
+  background: radial-gradient(circle at 30% 30%, #ff6b9d, #c94b7a);
+  box-shadow: 0 0 30px rgba(255,107,157,0.3), inset 0 -10px 20px rgba(0,0,0,0.3);
+  animation: float-1 7s ease-in-out infinite reverse;
+}
+
+@keyframes float-1 { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(5deg); } }
+@keyframes float-2 { 0%, 100% { transform: rotate(35deg) translateY(0); } 50% { transform: rotate(45deg) translateY(-20px); } }
+@keyframes float-3 { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-25px) translateX(10px); } }
+
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  max-width: 800px; margin: 0 auto;
+}
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; border-radius: 50px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  font-size: 13px; color: var(--text-secondary); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease both;
+}
+.hero-label .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #4dd0e1;
+  box-shadow: 0 0 10px var(--cyan-glow);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.hero-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(48px, 8vw, 96px); line-height: 1.05;
+  letter-spacing: -2px; margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+.hero-title .gradient-text {
+  background: var(--gradient-1);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-subtitle {
+  font-size: 18px; color: var(--text-secondary); max-width: 560px;
+  margin: 0 auto 48px; line-height: 1.7; font-weight: 300;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+.hero-actions {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; border-radius: 50px; font-size: 14px; font-weight: 600;
+  background: var(--gradient-1); color: #fff; letter-spacing: 0.5px;
+  transition: var(--transition); cursor: pointer; border: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px var(--accent-glow); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; border-radius: 50px; font-size: 14px; font-weight: 500;
+  background: var(--glass); color: var(--text-primary);
+  border: 1px solid var(--glass-border); transition: var(--transition); cursor: pointer;
+}
+.btn-secondary:hover { background: var(--surface-hover); border-color: rgba(255,255,255,0.15); }
+
+.hero-stats {
+  display: flex; gap: 48px; justify-content: center; margin-top: 72px;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+.stat { text-align: center; }
+.stat-number { font-family: var(--font-display); font-size: 36px; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =================== SECTION BASE =================== */
+section { padding: 120px 40px; position: relative; }
+.section-container { max-width: var(--max-width); margin: 0 auto; }
+.section-header { margin-bottom: 64px; }
+.section-label {
+  display: inline-block; font-size: 12px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; font-weight: 500;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800; letter-spacing: -1px; line-height: 1.15;
+}
+.section-desc { font-size: 16px; color: var(--text-secondary); max-width: 520px; margin-top: 16px; line-height: 1.7; }
+
+/* =================== ABOUT =================== */
+.about { background: var(--bg-secondary); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.about-visual {
+  position: relative; height: 500px;
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.about-visual-inner {
+  width: 100%; height: 100%; border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, #0f1035, #1a1a4e);
+  border: 1px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.about-visual-inner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(108,99,255,0.15), transparent 60%);
+}
+.about-initials {
+  font-family: var(--font-display); font-size: 120px; font-weight: 900;
+  background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: 0.9; position: relative; z-index: 1;
+}
+.about-text { }
+.about-text p { color: var(--text-secondary); margin-bottom: 20px; font-size: 16px; line-height: 1.8; }
+.about-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.about-info-item {
+  padding: 16px 20px; background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+}
+.about-info-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 4px; }
+.about-info-value { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+/* =================== EXPERIENCE =================== */
+.experience-timeline { position: relative; }
+.exp-item {
+  display: grid; grid-template-columns: 200px 1fr; gap: 40px;
+  padding: 40px 0; border-bottom: 1px solid var(--glass-border);
+  transition: var(--transition);
+}
+.exp-item:first-child { padding-top: 0; }
+.exp-item:last-child { border-bottom: none; }
+.exp-date { font-size: 13px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.5px; padding-top: 4px; }
+.exp-content {}
+.exp-role { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.exp-company { font-size: 15px; color: var(--accent-light); margin-bottom: 12px; font-weight: 500; }
+.exp-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.exp-tag {
+  padding: 4px 12px; border-radius: 50px; font-size: 12px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+}
+
+/* =================== PROJECTS =================== */
+.projects { background: var(--bg-secondary); }
+.project-filters {
+  display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 10px 24px; border-radius: 50px; font-size: 13px; font-weight: 500;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text-secondary); cursor: pointer; transition: var(--transition);
+  font-family: var(--font-body);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+.projects-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px;
+}
+.project-card {
+  background: var(--surface); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition);
+  cursor: pointer; position: relative; group: true;
+}
+.project-card:hover {
+  transform: translateY(-6px); border-color: rgba(108,99,255,0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px var(--accent-glow);
+}
+.project-thumb {
+  width: 100%; height: 240px; overflow: hidden; position: relative;
+}
+.project-thumb-inner {
+  width: 100%; height: 100%; transition: transform 0.6s ease;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 28px; font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.project-card:hover .project-thumb-inner { transform: scale(1.05); }
+.project-img {
+  width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+  display: block;
+}
+.project-card:hover .project-img { transform: scale(1.05); }
+
+/* Unique project gradients */
+.project-thumb-inner.mashwar { background: linear-gradient(135deg, #1a237e, #283593); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.zippy { background: linear-gradient(135deg, #004d40, #00695c); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.voyage { background: linear-gradient(135deg, #1b1b3a, #2d2d5e); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.skegg { background: linear-gradient(135deg, #311b92, #4527a0); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.musig { background: linear-gradient(135deg, #b71c1c, #c62828); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.mecare { background: linear-gradient(135deg, #0d47a1, #1565c0); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.haris { background: linear-gradient(135deg, #e65100, #ef6c00); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.edvizi { background: linear-gradient(135deg, #6c63ff, #4a42cc); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.arctic { background: linear-gradient(135deg, #006064, #00838f); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.polyread { background: linear-gradient(135deg, #4a148c, #6a1b9a); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.intulect { background: linear-gradient(135deg, #1a1a2e, #16213e); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.ptf { background: linear-gradient(135deg, #0a0f1e, #1a2742); color: rgba(255,255,255,0.85); }
+.project-thumb-inner.consultant { background: linear-gradient(135deg, #263238, #37474f); color: rgba(255,255,255,0.85); }
+
+.project-info { padding: 24px; }
+.project-category {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--cyan); margin-bottom: 8px; font-weight: 500;
+}
+.project-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.project-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.project-link-arrow {
+  position: absolute; top: 24px; right: 24px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--text-secondary);
+  transition: var(--transition); opacity: 0; transform: translateY(8px);
+}
+.project-card:hover .project-link-arrow { opacity: 1; transform: translateY(0); }
+
+/* =================== SKILLS =================== */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+.skill-item {
+  padding: 24px 16px; text-align: center;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); transition: var(--transition);
+}
+.skill-item:hover { border-color: rgba(108,99,255,0.3); background: var(--surface-hover); transform: translateY(-4px); }
+.skill-icon { font-size: 28px; margin-bottom: 12px; }
+.skill-name { font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+
+.skills-subsection { margin-top: 48px; }
+.skills-subsection-title { font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--text-secondary); }
+.tools-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.tool-pill {
+  padding: 10px 20px; border-radius: 50px; font-size: 13px; font-weight: 500;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text-primary); transition: var(--transition);
+}
+.tool-pill:hover { background: var(--surface-hover); border-color: var(--accent); color: var(--accent-light); }
+
+/* =================== CONTACT =================== */
+.contact { background: var(--bg-secondary); position: relative; overflow: hidden; }
+.contact::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 50% 50% at 50% 80%, rgba(108,99,255,0.08), transparent);
+}
+.contact-inner { position: relative; z-index: 1; text-align: center; max-width: 700px; margin: 0 auto; }
+.contact-title {
+  font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800; margin-bottom: 20px; letter-spacing: -1px;
+}
+.contact-subtitle { font-size: 17px; color: var(--text-secondary); margin-bottom: 48px; line-height: 1.7; }
+.contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+.contact-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 50px; font-size: 14px; font-weight: 500;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text-primary); transition: var(--transition);
+}
+.contact-link:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-2px); }
+.contact-email {
+  font-family: var(--font-display); font-size: clamp(16px, 2.5vw, 22px); font-weight: 600;
+  color: var(--accent-light); transition: var(--transition);
+}
+.contact-email:hover { color: var(--cyan); }
+
+/* =================== FOOTER =================== */
+.footer {
+  padding: 40px; border-top: 1px solid var(--glass-border);
+  text-align: center; font-size: 13px; color: var(--text-muted);
+}
+
+/* =================== SCROLL ANIMATIONS =================== */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 1024px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-visual { height: 360px; }
+  .exp-item { grid-template-columns: 1fr; gap: 8px; }
+  .projects-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 16px 24px; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(7,8,26,0.96); border-bottom: 1px solid var(--glass-border); }
+  .nav-links.open { display: flex; }
+  .nav-links li a { display: block; padding: 16px 24px; }
+  .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+
+  section { padding: 80px 24px; }
+  .hero { padding: 120px 24px 80px; }
+  .hero-stats { gap: 32px; }
+  .stat-number { font-size: 28px; }
+  .float-obj-1 { width: 70px; height: 70px; }
+  .float-obj-2 { width: 50px; height: 50px; }
+  .float-obj-3 { width: 60px; height: 60px; }
+  .float-obj-4 { width: 40px; height: 40px; }
+  .about-info-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(3, 1fr); }
+  .contact-links { flex-direction: column; align-items: center; }
+}
+
+/* Noise overlay */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 256px 256px; opacity: 0.4;
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">RM.</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about" onclick="this.closest('.nav-links').classList.remove('open')">About</a></li>
+      <li><a href="#experience" onclick="this.closest('.nav-links').classList.remove('open')">Experience</a></li>
+      <li><a href="#projects" onclick="this.closest('.nav-links').classList.remove('open')">Work</a></li>
+      <li><a href="#skills" onclick="this.closest('.nav-links').classList.remove('open')">Skills</a></li>
+      <li><a href="#contact" onclick="this.closest('.nav-links').classList.remove('open')">Contact</a></li>
+    </ul>
+    <a href="mailto:design.ranamubashir@gmail.com" class="nav-cta">Let's Talk</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="float-obj float-obj-1"></div>
+  <div class="float-obj float-obj-2"></div>
+  <div class="float-obj float-obj-3"></div>
+  <div class="float-obj float-obj-4"></div>
+  <div class="hero-content">
+    <div class="hero-label"><span class="dot"></span> Available for Projects</div>
+    <h1 class="hero-title">
+      <span class="gradient-text">Rana</span><br>Mubashir
+    </h1>
+    <p class="hero-subtitle">Senior UI/UX & Product Designer crafting user-centered digital experiences for web, mobile, and SaaS platforms.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects &#8599;</a>
+      <a href="https://www.behance.net/ranamubashir1" target="_blank" class="btn-secondary">Behance Portfolio</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-number">4+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-number">95+</div><div class="stat-label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat-number">15+</div><div class="stat-label">Clients Worldwide</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="section-container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-visual-inner">
+          <div class="about-initials">RM</div>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-1">
+        <div class="section-header">
+          <div class="section-label">About Me</div>
+          <h2 class="section-title">Designing products people actually love to use.</h2>
+        </div>
+        <p>Product Designer with over 4 years of experience in UI/UX design, focused on delivering user-centered digital solutions for both web and mobile platforms. Skilled in wireframing, prototyping, and building high-fidelity UI with an emphasis on usability, accessibility, and visual appeal.</p>
+        <p>Experienced in creating startup MVPs, enterprise dashboards, and customer-facing applications. I bring design strategies that craft functional, creative, and visually engaging products driving real business value.</p>
+        <div class="about-info-grid">
+          <div class="about-info-item">
+            <div class="about-info-label">Location</div>
+            <div class="about-info-value">Lahore, Pakistan</div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-label">Education</div>
+            <div class="about-info-value">BS Computer Science</div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-label">Specialization</div>
+            <div class="about-info-value">Product & UI/UX Design</div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-label">Languages</div>
+            <div class="about-info-value">English, Urdu, Punjabi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Where I've been shaping products.</h2>
+    </div>
+    <div class="experience-timeline">
+      <div class="exp-item reveal">
+        <div class="exp-date">Feb 2025 — Present</div>
+        <div class="exp-content">
+          <div class="exp-role">Sr. UX/UI Designer</div>
+          <div class="exp-company">ZAPTA Technologies</div>
+          <div class="exp-desc">Currently working as a UI/UX designer for user-centric websites, mobile applications, and dashboards. Driving design systems and cross-functional collaboration.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Design Systems</span>
+            <span class="exp-tag">Figma</span>
+            <span class="exp-tag">Mobile</span>
+            <span class="exp-tag">Dashboards</span>
+            <span class="exp-tag">Prototyping</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item reveal reveal-delay-1">
+        <div class="exp-date">2023 — 2025</div>
+        <div class="exp-content">
+          <div class="exp-role">UX/UI Designer</div>
+          <div class="exp-company">Vertical Sols</div>
+          <div class="exp-desc">Built user-focused web and mobile experiences, optimized through testing, and aligned with business goals across multiple product verticals.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Web Apps</span>
+            <span class="exp-tag">User Research</span>
+            <span class="exp-tag">Wireframing</span>
+            <span class="exp-tag">A/B Testing</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-date">2022 — 2023</div>
+        <div class="exp-content">
+          <div class="exp-role">Associate UX/UI Designer</div>
+          <div class="exp-company">HashtagWeb</div>
+          <div class="exp-desc">Started as a junior UI/UX designer and gained extensive experience in web and mobile app design, building a strong foundation in user-centered methodologies.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">UI Design</span>
+            <span class="exp-tag">Responsive</span>
+            <span class="exp-tag">Prototyping</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item reveal reveal-delay-3">
+        <div class="exp-date">2021 — 2022</div>
+        <div class="exp-content">
+          <div class="exp-role">Graphic Designer</div>
+          <div class="exp-company">Golden Gateway</div>
+          <div class="exp-desc">Completed a 4-month internship in graphic design and social media marketing, developing visual communication and branding skills.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Branding</span>
+            <span class="exp-tag">Social Media</span>
+            <span class="exp-tag">Illustrator</span>
+            <span class="exp-tag">Photoshop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-label">Selected Work</div>
+      <h2 class="section-title">Projects that moved the needle.</h2>
+      <p class="section-desc">A curated selection from 95+ projects spanning mobile apps, SaaS platforms, websites, and landing pages.</p>
+    </div>
+    <div class="project-filters reveal">
+      <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+      <button class="filter-btn" onclick="filterProjects('mobile', this)">Mobile Apps</button>
+      <button class="filter-btn" onclick="filterProjects('website', this)">Website Design</button>
+      <button class="filter-btn" onclick="filterProjects('saas', this)">SaaS B2B</button>
+      <button class="filter-btn" onclick="filterProjects('landing', this)">Landing Pages</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+
+      <div class="project-card reveal" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2360" alt="EdVizi System" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner edvizi" style="display:none">EdVizi</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">SaaS B2B</div>
+          <div class="project-name">EdVizi System</div>
+          <div class="project-desc">Simplifying how edtech companies manage their go-to-market processes with an intuitive dashboard system.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2224" alt="Mashwar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner mashwar" style="display:none">Mashwar</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Mobile App</div>
+          <div class="project-name">Mashwar</div>
+          <div class="project-desc">A freight booking mobile app bridging communication between customers and freight drivers seamlessly.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <div class="project-thumb-inner ptf">Pro Traders Fund</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">SaaS / Fintech</div>
+          <div class="project-name">Pro Traders Fund</div>
+          <div class="project-desc">Platform for traders to access proprietary funding, performance tracking, risk controls, and capital scaling.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2243" alt="Zippy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner zippy" style="display:none">Zippy</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Mobile App</div>
+          <div class="project-name">Zippy</div>
+          <div class="project-desc">Mobile application designed with a focus on speed, usability, and clean visual hierarchy.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2262" alt="Voyage Cabin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner voyage" style="display:none">Voyage Cabin</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Mobile App</div>
+          <div class="project-name">Voyage Cabin</div>
+          <div class="project-desc">Travel and booking experience with immersive visual storytelling and intuitive navigation flows.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2368" alt="Arctic Intelligence" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner arctic" style="display:none">Arctic Intelligence</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">SaaS B2B</div>
+          <div class="project-name">Arctic Intelligence</div>
+          <div class="project-desc">Enterprise intelligence platform with data-driven dashboards and compliance workflows.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal" data-category="website" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2319" alt="Me Care" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner mecare" style="display:none">Me Care</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Website Design</div>
+          <div class="project-name">Me Care</div>
+          <div class="project-desc">Healthcare-focused website with clean, trustworthy aesthetics and accessible user flows.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2281" alt="Skegg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner skegg" style="display:none">Skegg</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Mobile App</div>
+          <div class="project-name">Skegg</div>
+          <div class="project-desc">Mobile product with refined micro-interactions and a bold visual identity system.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2376" alt="Polyread AI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner polyread" style="display:none">Polyread AI</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">SaaS B2B</div>
+          <div class="project-name">Polyread AI</div>
+          <div class="project-desc">AI-powered reading and content platform with intelligent summarization features.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal" data-category="website" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2335" alt="Haris Travels" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner haris" style="display:none">Haris Travels</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Website Design</div>
+          <div class="project-name">Haris Travels</div>
+          <div class="project-desc">Travel agency website with vibrant visuals and conversion-optimized booking flows.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1" data-category="saas" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2384" alt="Intulect" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner intulect" style="display:none">Intulect</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">SaaS B2B</div>
+          <div class="project-name">Intulect</div>
+          <div class="project-desc">Enterprise SaaS platform focused on intelligent automation and workflow optimization.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2300" alt="Musig" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner musig" style="display:none">Musig</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Mobile App</div>
+          <div class="project-name">Musig</div>
+          <div class="project-desc">Music-centric mobile experience with immersive audio controls and dynamic visual UI.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal" data-category="landing" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <img class="project-img" src="https://www.figma.com/file/gAGK144dfXp6qSVmsFrt9A/thumbnail?node-id=3072-2401" alt="Business Consultant" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-thumb-inner consultant" style="display:none">Business Consultant</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Landing Page</div>
+          <div class="project-name">Business Consultant</div>
+          <div class="project-desc">High-converting landing page for a business consulting firm with strategic messaging and CTAs.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+      <div class="project-card reveal" data-category="mobile" onclick="window.open('https://www.behance.net/ranamubashir1','_blank')">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background: linear-gradient(135deg, #1565c0, #1976d2); color: rgba(255,255,255,0.85);">Qick</div>
+        </div>
+        <div class="project-info">
+          <div class="project-category">Mobile App</div>
+          <div class="project-name">Qick</div>
+          <div class="project-desc">Simplifies soccer facility management with automated bookings, payments, scheduling, and player coordination.</div>
+        </div>
+        <div class="project-link-arrow">&#8599;</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-title">Skills & tools I bring to the table.</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-item"><div class="skill-icon">&#9881;</div><div class="skill-name">UI Design</div></div>
+      <div class="skill-item"><div class="skill-icon">&#128270;</div><div class="skill-name">UX Research</div></div>
+      <div class="skill-item"><div class="skill-icon">&#9998;</div><div class="skill-name">Wireframing</div></div>
+      <div class="skill-item"><div class="skill-icon">&#9654;</div><div class="skill-name">Prototyping</div></div>
+      <div class="skill-item"><div class="skill-icon">&#127912;</div><div class="skill-name">Visual Design</div></div>
+      <div class="skill-item"><div class="skill-icon">&#128736;</div><div class="skill-name">Design Systems</div></div>
+      <div class="skill-item"><div class="skill-icon">&#128241;</div><div class="skill-name">Responsive</div></div>
+      <div class="skill-item"><div class="skill-icon">&#9989;</div><div class="skill-name">Usability Testing</div></div>
+    </div>
+    <div class="skills-subsection reveal">
+      <div class="skills-subsection-title">Design Tools</div>
+      <div class="tools-row">
+        <span class="tool-pill">Figma</span>
+        <span class="tool-pill">Adobe XD</span>
+        <span class="tool-pill">Illustrator</span>
+        <span class="tool-pill">Photoshop</span>
+        <span class="tool-pill">Framer</span>
+        <span class="tool-pill">Miro</span>
+        <span class="tool-pill">FigJam</span>
+      </div>
+    </div>
+    <div class="skills-subsection reveal">
+      <div class="skills-subsection-title">Collaboration & PM</div>
+      <div class="tools-row">
+        <span class="tool-pill">Jira</span>
+        <span class="tool-pill">ClickUp</span>
+        <span class="tool-pill">Slack</span>
+        <span class="tool-pill">Notion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="section-container">
+    <div class="contact-inner reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="contact-title">Let's build something <span class="gradient-text" style="-webkit-text-fill-color: transparent; background: var(--gradient-1); -webkit-background-clip: text;">great together.</span></h2>
+      <p class="contact-subtitle">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+      <div class="contact-links">
+        <a href="mailto:design.ranamubashir@gmail.com" class="contact-link">&#9993; Email Me</a>
+        <a href="https://www.linkedin.com/in/ranamubashirdesigner" target="_blank" class="contact-link">&#128279; LinkedIn</a>
+        <a href="https://www.behance.net/ranamubashir1" target="_blank" class="contact-link">&#127912; Behance</a>
+        <a href="tel:+923186224490" class="contact-link">&#128222; Call</a>
+      </div>
+      <a href="mailto:design.ranamubashir@gmail.com" class="contact-email">design.ranamubashir@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2026 Rana Mubashir. Designed with intention.</p>
+</footer>
+
+<script>
+// Scroll reveal
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Project filter
+function filterProjects(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = '';
+      setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
+    } else {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => { card.style.display = 'none'; }, 300);
+    }
+  });
+}
+
+// Nav shrink on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (window.scrollY > 80) {
+    nav.style.padding = '12px 40px';
+  } else {
+    nav.style.padding = '20px 40px';
+  }
+});
+</script>
+</body>
+</html>
