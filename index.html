@@ -413,6 +413,19 @@ section { padding: 120px 40px; position: relative; }
 }
 .contact-email:hover { color: var(--cyan); }
 
+/* =================== GO TO TOP BUTTON =================== */
+.go-top {
+  position: fixed; bottom: 32px; right: 32px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--gradient-1); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 20px; box-shadow: 0 8px 30px var(--accent-glow);
+  opacity: 0; transform: translateY(20px); pointer-events: none;
+  transition: var(--transition);
+}
+.go-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.go-top:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--accent-glow); }
+
 /* =================== FOOTER =================== */
 .footer {
   padding: 40px; border-top: 1px solid var(--glass-border);
@@ -876,6 +889,9 @@ body::after {
   </div>
 </section>
 
+<!-- Go to Top Button -->
+<button class="go-top" id="goTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top">&#8593;</button>
+
 <!-- Footer -->
 <footer class="footer">
   <p>&copy; 2026 Rana Mubashir. Designed with intention.</p>
@@ -909,13 +925,19 @@ function filterProjects(category, btn) {
   });
 }
 
-// Nav shrink on scroll
+// Nav shrink on scroll + Go to top button
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('.nav');
+  const goTop = document.getElementById('goTop');
   if (window.scrollY > 80) {
     nav.style.padding = '12px 40px';
   } else {
     nav.style.padding = '20px 40px';
+  }
+  if (window.scrollY > 500) {
+    goTop.classList.add('visible');
+  } else {
+    goTop.classList.remove('visible');
   }
 });
 </script>
