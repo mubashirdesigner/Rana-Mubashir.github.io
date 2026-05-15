@@ -469,6 +469,26 @@ section { padding: 120px 40px; position: relative; }
   .contact-links { flex-direction: column; align-items: center; }
 }
 
+/* =================== CURSOR GLOW TRAIL =================== */
+.cursor-glow {
+  position: fixed; width: 24px; height: 24px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,99,255,0.6), rgba(77,208,225,0.4));
+  pointer-events: none; z-index: 9998; mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+.cursor-trail {
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 9997; mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  animation: trailFade 0.8s ease-out forwards;
+}
+@keyframes trailFade {
+  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.5); }
+}
+@media (max-width: 768px) { .cursor-glow, .cursor-trail { display: none; } }
+
 /* Noise overlay */
 body::after {
   content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
@@ -478,6 +498,7 @@ body::after {
 </style>
 </head>
 <body>
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- Navigation -->
 <nav class="nav">
@@ -940,6 +961,41 @@ window.addEventListener('scroll', () => {
     goTop.classList.remove('visible');
   }
 });
+// Cursor glow trail
+const cursorGlow = document.getElementById('cursorGlow');
+const trailColors = [
+  'rgba(108,99,255,0.4)',
+  'rgba(77,208,225,0.35)',
+  'rgba(139,131,255,0.3)',
+  'rgba(108,99,255,0.25)',
+  'rgba(77,208,225,0.2)',
+];
+let trailIndex = 0;
+let lastTrail = 0;
+
+document.addEventListener('mousemove', (e) => {
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top = e.clientY + 'px';
+
+  const now = Date.now();
+  if (now - lastTrail > 30) {
+    lastTrail = now;
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    const size = 12 + Math.random() * 10;
+    trail.style.width = size + 'px';
+    trail.style.height = size + 'px';
+    trail.style.left = e.clientX + 'px';
+    trail.style.top = e.clientY + 'px';
+    trail.style.background = trailColors[trailIndex % trailColors.length];
+    trailIndex++;
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 800);
+  }
+});
+
+document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
+document.addEventListener('mouseenter', () => { cursorGlow.style.opacity = '1'; });
 </script>
 </body>
 </html>
