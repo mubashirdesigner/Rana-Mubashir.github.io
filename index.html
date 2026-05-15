@@ -469,25 +469,18 @@ section { padding: 120px 40px; position: relative; }
   .contact-links { flex-direction: column; align-items: center; }
 }
 
-/* =================== CURSOR GLOW TRAIL =================== */
-.cursor-glow {
-  position: fixed; width: 24px; height: 24px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(108,99,255,0.6), rgba(77,208,225,0.4));
-  pointer-events: none; z-index: 9998; mix-blend-mode: screen;
+/* =================== INVERTED CURSOR =================== */
+.cursor-follower {
+  position: fixed; width: 40px; height: 40px; border-radius: 50%;
+  background: #fff; pointer-events: none; z-index: 9998;
+  mix-blend-mode: difference;
   transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, opacity 0.3s;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
 }
-.cursor-trail {
-  position: fixed; border-radius: 50%;
-  pointer-events: none; z-index: 9997; mix-blend-mode: screen;
-  transform: translate(-50%, -50%);
-  animation: trailFade 0.8s ease-out forwards;
+.cursor-follower.hovering {
+  width: 80px; height: 80px;
 }
-@keyframes trailFade {
-  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.5); }
-}
-@media (max-width: 768px) { .cursor-glow, .cursor-trail { display: none; } }
+@media (max-width: 768px) { .cursor-follower { display: none; } }
 
 /* Noise overlay */
 body::after {
@@ -498,7 +491,7 @@ body::after {
 </style>
 </head>
 <body>
-<div class="cursor-glow" id="cursorGlow"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
 
 <!-- Navigation -->
 <nav class="nav">
@@ -961,41 +954,30 @@ window.addEventListener('scroll', () => {
     goTop.classList.remove('visible');
   }
 });
-// Cursor glow trail
-const cursorGlow = document.getElementById('cursorGlow');
-const trailColors = [
-  'rgba(108,99,255,0.4)',
-  'rgba(77,208,225,0.35)',
-  'rgba(139,131,255,0.3)',
-  'rgba(108,99,255,0.25)',
-  'rgba(77,208,225,0.2)',
-];
-let trailIndex = 0;
-let lastTrail = 0;
+// Inverted cursor follower
+const cursor = document.getElementById('cursorFollower');
+let cx = 0, cy = 0, px = 0, py = 0;
 
-document.addEventListener('mousemove', (e) => {
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top = e.clientY + 'px';
+document.addEventListener('mousemove', (e) => { cx = e.clientX; cy = e.clientY; });
 
-  const now = Date.now();
-  if (now - lastTrail > 30) {
-    lastTrail = now;
-    const trail = document.createElement('div');
-    trail.className = 'cursor-trail';
-    const size = 12 + Math.random() * 10;
-    trail.style.width = size + 'px';
-    trail.style.height = size + 'px';
-    trail.style.left = e.clientX + 'px';
-    trail.style.top = e.clientY + 'px';
-    trail.style.background = trailColors[trailIndex % trailColors.length];
-    trailIndex++;
-    document.body.appendChild(trail);
-    setTimeout(() => trail.remove(), 800);
-  }
+function animateCursor() {
+  px += (cx - px) * 0.15;
+  py += (cy - py) * 0.15;
+  cursor.style.left = px + 'px';
+  cursor.style.top = py + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Grow cursor on interactive/text elements
+const hoverTargets = document.querySelectorAll('a, button, .project-card, .hero-title, .section-title, .contact-title, .nav-logo, .stat-number, .exp-role, .project-name, .skill-item, h1, h2');
+hoverTargets.forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
 
-document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
-document.addEventListener('mouseenter', () => { cursorGlow.style.opacity = '1'; });
+document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
 </script>
 </body>
 </html>
